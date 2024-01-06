@@ -14,8 +14,8 @@
   }
 
         body {
-            background-color: #000000; /* Imposta il colore di sfondo del corpo a nero */
-            color: #ffffff; /* Imposta il colore del testo a bianco (o il colore desiderato) */
+            background-color: white; /* Imposta il colore di sfondo del corpo a nero */
+            color: black; /* Imposta il colore del testo a bianco (o il colore desiderato) */
         }
 	
 	/* Navbar styles */
@@ -56,6 +56,30 @@
       margin-top: 10px;
     }
 
+.article-link {
+  text-decoration: none; /* Rimuove il sottolineato */
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 60%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  position: relative;
+  color: white;
+  top: 0px;
+  left: 0px;
+}
+
+    
+.times {
+  font-family: "Times New Roman", Times, serif;
+  }
+  
 	</style>
 
 </head>
@@ -87,16 +111,16 @@
 
   <!-- Project Section -->
   <div class="w3-container w3-padding-32" id="projects">
-    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Projects</h3>
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">  </h3>
   </div>
 
-  <div class="w3-row-padding">
-    <div class="w3-col l3 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <a href="https://davidoffdado.github.io/site/gaza" class="w3-bar-item w3-button"  target="_blank"> <img src="gaza1/cum_deaths-1.png" alt="cumulative.deaths" width="700" height="400"> Gaza bombings </a>
-      </div>
-    </div>
-  </div>
+
+<div class="container">
+  <a href="https://davidoffdado.github.io/site/gaza" class="article-link"  target="_blank">
+  <img src="gaza1/cum_deaths-1.png" style="width:70%;">
+  <p class="centered w3-text-black times w3-hover-text-light-gray" style="font-size:50px;font-weight:700"> I bombardamenti hanno annientato Gaza. </p>
+  </a>
+</div>
   
 
 
@@ -105,8 +129,9 @@
 
 
 <!-- Footer -->
-<footer class="w3-center w3-black w3-padding-16">
-	<p>&copy; 2023 David Ruffini </p>
+<footer class="w3-center w3-white w3-padding-16">
+  
+	<p class="w3-text-grey">&copy; 2024 David Ruffini </p>
 </footer>
 
 </body>
