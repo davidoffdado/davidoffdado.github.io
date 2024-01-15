@@ -47,7 +47,7 @@ li.section {
 	font-weight: bold;
 }
 
-#work .nav-item {
+#italia .nav-item {
 	color: #000;
 }
 
@@ -79,7 +79,7 @@ a:hover {
 	overflow: hidden;
 }
 
-#work-section {
+#italia-section {
 	margin: 10px auto 0 auto;
 }
 
@@ -98,10 +98,15 @@ a:hover {
 }
 
 
-#fun-section {
+#medio-oriente-section {
 	display: none;
 	margin: 10px auto 0 auto;
 }
+
+#ucraina-section {
+	margin: 10px auto 0 auto;
+}
+
 
 /* -------- CORNER RIBBONS (adapted from trapezoid https://css-tricks.com/examples/ShapesOfCSS/) ----------*/
 
@@ -339,7 +344,7 @@ span.subhead {
 
 
 @media screen and (max-width: 600px) {
-	#work-section, #fun-section {
+	#work-section, #medio-oriente-section, #ucraina-section {
 		width: 90%;
 	}
 
