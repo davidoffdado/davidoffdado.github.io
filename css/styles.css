@@ -12,12 +12,12 @@ p {
 	padding-top: 40px;
 }
 
-                .testo-a-larghezza-fissa {
-                    width: 600px; /* Puoi impostare qualsiasi larghezza che preferisci */
-                      word-wrap: break-word; /* Questa proprietà fa andare a capo il testo */
-                      text-align: left;
-                    margin:0 auto;
-                    padding-top: 20px;
+.testo-a-larghezza-fissa {
+         width: 600px; /* Puoi impostare qualsiasi larghezza che preferisci */
+         word-wrap: break-word; /* Questa proprietà fa andare a capo il testo */
+         text-align: left;
+         margin:0 auto;
+         padding-top: 20px;
                   }
                 
 
@@ -56,7 +56,7 @@ li.section {
 	font-weight: bold;
 }
 
-#italia .nav-item {
+#articoli .nav-item {
 	color: #000;
 }
 
@@ -80,7 +80,7 @@ a:hover {
 }
 
 
-/* -------- WORK CONTAINER ----------*/
+/* -------- ARTICOLI CONTAINER ----------*/
 
 #main-container {
 	margin: 75px auto 0 auto;
@@ -88,7 +88,7 @@ a:hover {
 	overflow: hidden;
 }
 
-#italia-section {
+#articoli-section {
 	margin: 10px auto 0 auto;
 }
 
@@ -100,7 +100,7 @@ a:hover {
 
 .thumb {
 	width: 100%;
-	height: 300px;
+	height: 250px;
 }
 
 .row {
@@ -108,15 +108,7 @@ a:hover {
 }
 
 
-#medio-oriente-section {
-	display: none;
-	margin: 10px auto 0 auto;
-}
 
-#ucraina-section {
-	display: none;
-	margin: 10px auto 0 auto;
-}
 
 
 /* -------- CORNER RIBBONS (adapted from trapezoid https://css-tricks.com/examples/ShapesOfCSS/) ----------*/
@@ -355,7 +347,7 @@ span.subhead {
 
 
 @media screen and (max-width: 600px) {
-	#work-section, #medio-oriente-section, #ucraina-section {
+	#articoli-section {
 		width: 90%;
 	}
 
