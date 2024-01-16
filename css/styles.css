@@ -12,6 +12,15 @@ p {
 	padding-top: 40px;
 }
 
+                .testo-a-larghezza-fissa {
+                    width: 600px; /* Puoi impostare qualsiasi larghezza che preferisci */
+                      word-wrap: break-word; /* Questa proprietà fa andare a capo il testo */
+                      text-align: left;
+                    margin:0 auto;
+                    padding-top: 20px;
+                  }
+                
+
 /* -------- HERO IMAGE ----------*/
 #name-plate {
 	margin: 100px 0 50px 0;
