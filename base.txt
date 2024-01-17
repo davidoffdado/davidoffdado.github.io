@@ -2,7 +2,7 @@
   
   <html>
   <head>
-  <title> Il supporto all'Ucraina | David Ruffini</title>
+  <title> Il 7 ottobre | David Ruffini</title>
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
       <!-- FAVICON -->
@@ -15,8 +15,8 @@
                 <!-- FONTS -->
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
                   <style>
-                  
 
+                
                 
                 .times {
                   font-family: "Times New Roman", Times, serif;
@@ -34,7 +34,7 @@
 #img-title {
     background-image:
     linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)),
-    url('ucraina/percentuale.png');
+    url('attack/kibbutz.jpg');
     width: 80%;
     height: 400px;
     background-size: cover;
@@ -82,70 +82,40 @@
   <div id="name-plate">
     <a href="https://davidoffdado.github.io/site/"> <img id="hero" src="images/logo-black.png" style="width:20%"> </a> 
       </div>
-     
-  <!-- MAIN CONTAINER -->
-          <div id="main-container">
+      
+<!-- END MAIN NAV -->
+                    
+                    <!-- MAIN CONTAINER -->
+                    <div id="main-container">
                       
-            <div id="work-section" class="article-container times" style="font-size:20px;">
+                      <div id="work-section" class="article-container times" style="font-size:20px;">
                         <div class="title">
       <hr style="display: block;margin-top: 2em;margin-bottom: 2em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;border-color:gainsboro;"> 
                           
-                          <h1 class="times" style="font-size:60px"><strong> Il supporto all'Ucraina </strong></h1>
-                            <h4 class="times" style="opacity: 0.7;"> Da chi vengono gli aiuti e di che tipo sono? </h4>
+                          <h1 class="times" style="font-size:60px"><strong> Il 7 ottobre </strong></h1>
+                            <h4 class="times" style="opacity: 0.7;"> L'attentato di Hamas </h4>
                               
                               <p style="opacity: 0.5;margin: 0 auto;text-align: center;font-size:10px"><time datetime="2024-01-08">8 Gennaio 2024</time></p>
                                 
                                 
                                 
-                             <!--   <div id='img-title' style="margin-top:50px;"><h1 class="times" style="font-size:60px;"><strong> </strong></h1></div> -->
+                              <!--  <div id='img-title' style="margin-top:50px;"><h1 class="times" style="font-size:60px;"><strong> </strong></h1></div> -->
                                   
                                   <p style="opacity: 0.6; margin-top: 16px;text-align: center;"></p>
                                     <hr style="display: block;margin-top: 2em;margin-bottom: 2em;margin-left: auto;margin-right: auto;border-style: inset;border-width: 1px;border-color:gainsboro;"> 
                                       </div>
-                                     
-
+                                      <div class="testo-a-larghezza-fissa">
+                                        <!-- Contenuto testuale -->
+                                       </div>
+                                       
+                                           <img src="attack/massacres_places_names.png" alt="maps.massacres" width="700px" height="400">
+                                          <p style="opacity: 0.6; margin-top: 16px;text-align: center; font-size:10px">Mappa dell'attacco terroristico guidato da Hamas.</p>
                                               
-                                              <div class="testo-a-larghezza-fissa">
-                                                <!-- Contenuto testuale -->
-Nel 2014, in seguito all'Euromaidan, tra Ucraina e Russia inizia un conflitto che raggiunge il suo apice con l'invasione dell'Ucraina da parte dell'esercito russo il 24 febbraio 2022. 
-                                              </div>
-                                        <div class="testo-a-larghezza-fissa">
-Durante la primavera del 2021 Putin iniziò a schierare mezzi e militari russi vicino ai confini ucraini con la Bielorussia, utilizzando come scusa quella delle esercitazioni che avrebbe praticato insieme a quest'ultima. Nei mesi successivi le truppe ammassate iniziarono a spuntare anche sul confine russo-ucraino. 
-</div>
-
-                                        <div class="testo-a-larghezza-fissa">
-Il 24 febbraio 2022 la Russia invade l'Ucraina.
-
-</div>
-
-                                        <div class="testo-a-larghezza-fissa">
-Diversi paesi, forse in ottica di "si vis pacem, para bellum", iniziarono a inviare aiuti all'ucraina già dal gennaio 2022. Da questo mese al 31 di ottobre 2023 sono stati molti i paesi a contribuire alla difesa dell'Ucraina. Limitandoci per un momento all'Europa, e alla percentuale sul prodotto interno lordo, notiamo come la vicinanza geografica alla Russia sia un fattore importante per decidere quanto spendere per la causa ucraina.
-
-</div>
-
-                                          
-                                          <img src="ucraina/map_colors.png" alt="furti" width="700px" height="400">
-                                            <p style="opacity: 0.6; margin-top: 16px;text-align: center; font-size:10px">Europa colorata in basse al supporto ucraino. </p>
-                                                          <div class="testo-a-larghezza-fissa">
-                            
-Allargandoci a tutti i paesi contribuenti vediamo come sia ancora la Norvegia a spiccare tra gli aiuti diretti. L'Italia è quasi il fanalino di coda dei paesi dell'Unione Europea. Gli Stati Uniti si trovano al 15° posto considerando la quota relativa al prodotto interno lordo.
-     </div>                                  
-                                           <img src="ucraina/percentuale.png" alt="percosse" width="700px" height="400">
-                                          <p style="opacity: 0.6; margin-top: 16px;text-align: center; font-size:10px">Aiuti dei vari paesi rispetto al prodotto interno lordo.</p>
-
-                                                          <div class="testo-a-larghezza-fissa">
-
-
-In termini assoluti l'Unione Europea fornisce la maggiore quantità di aiuti, limitandosi a quelli di carattere finanziario e umanitario; anche la Svizzera non ha inviato sostegni di tipo militare. Gli Stati Uniti, invece, hanno contribuito principalmente con l'invio di armi, così come Regno Unito e Germania.
-     </div>                                  
-
-                                           <img src="ucraina/assoluto_tutti_eu.png" alt="percosse" width="700px" height="400">
-                                          <p style="opacity: 0.6; margin-top: 16px;text-align: center; font-size:10px">Aiuti dei vari paesi in termini assoluti e distinti per tipologia.</p>
-                                              
-                                              <div class="testo-a-larghezza-fissa">
-                                                <!-- Contenuto testuale -->
-                                              </div>                     
                                         
+      
+</div>
+
+
 
 <!-- ABOUT SECTION -->
   <div id="about-section">
@@ -160,9 +130,8 @@ In termini assoluti l'Unione Europea fornisce la maggiore quantità di aiuti, li
         Se siete in disaccordo, riconoscete un mio errore o per qualsiasi altro motivo volete scrivermi, potete contattarmi nei          canali che ho messo in fondo alla pagina.
 
       </p>
-  
     </div> <!-- end "ABOUT" section -->
-  </div>
+
 </div> <!-- END MAIN CONTAINER -->
 
 
