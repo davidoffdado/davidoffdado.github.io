@@ -1,5 +1,8 @@
 $(document).ready(function(){
     // MUST REFACTOR THIS
+    // Nascondi tutte le sezioni tranne quella degli articoli all'inizio
+    $('#articoli-section').css('display', 'block');
+    $('#progetti-section, #about-section').css('display', 'none');
 
     $('#articoli').on('click', function(){
         $('.nav-item').css('color', '#adadad');
