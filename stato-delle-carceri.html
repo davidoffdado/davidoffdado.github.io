@@ -1,10 +1,23 @@
 <!DOCTYPE html>
   <html lang="it">
     <head>
-    <meta charset="UTF-8">
+      <meta charset="UTF-8">
+      <meta name="description" content="I dati aggiornati sullo stato del sistema carcerario italiano.">
+      <meta name="keywords" content="data journalism, dati, statistiche, david ruffini, carceri, sovraffollamento, suicidi">
+      <meta name="author" content="David Ruffini">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lo stato delle carceri italiane</title>
-        <style>
+      <meta name="robots" content="index,follow">
+      <meta property="og:title" content="Lo stato delle carceri italiane">
+      <meta property="og:description" content="I dati aggiornati sullo stato del sistema carcerario italiano.">
+      <meta property="og:image" content="https://www.davidruffini.com/stato-delle-carceri.html">
+      <meta name="twitter:card" content="summary_large_image">
+      <link rel="canonical" href="https://www.davidruffini.com/stato-delle-carceri.html">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/styles.css" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+      <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+      <title>Lo stato delle carceri italiane</title>
+      <style>
         body {
           font-family: Arial, sans-serif;
           max-width: 800px;
@@ -14,105 +27,138 @@
           background-color: #f9f9f9;
             color: #333;
         }
-      
-      h1, h2 {
+        
+        h1, h2 {
         color: #222;
-      }
-      
-      .chart-section {
+        }
+        
+        .chart-section {
         margin-bottom: 50px;
         background: #fff;
           padding: 20px;
         border-radius: 12px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      }
-      
-      .chart {
+        }
+        
+        .chart {
         margin: 20px 0;
-      }
-      
-      .comment {
+        }
+        
+        .comment {
         font-style: italic;
         color: #555;
           margin-top: 10px;
-      }
-      </style>
-        </head>
-        <body>
+        } 
         
-        <h1> Lo stato delle carceri italiane </h1>
-        <h5> Monitoraggio dello stato dei penitenziari italiani e delle morti avvenute all'interno delle carceri, attraverso i dati del Ministero della Giustizia e di Ristretti Orizzonti </h5>
-        
-        <div class="chart-section">
-        <h2>Come nasce il progetto?</h2>
-        <p>
-        Il lavoro presente in questo sito è realizzato da <a href="https://www.davidruffini.com/"> David Ruffini </a> e vuole mostrare lo stato delle carceri italiane, ormai da anni caratterizzate da un sovraffollamento grave che si ripercuote sia sui detenetui che sugli altri operatori presenti negli istituti. <br>
-        Un altro elemento che si vuole approfondire è quello dei suicidi nelle carceri. Solamente nel 2024, sono stati 92 i detenuti che si sono tolti la vita, segnando il numero più elevato dal 2002 a oggi. <br>
-        Tecnicamente, il progetto sfrutta due script in R: uno raccoglie i dati relativi al sovraffollamento, mentre l'altro si occupa dei dati sulle morti.
-        I dati riguardanti il sovraffollamento provengono dalle <a href="https://www.giustizia.it/giustizia/page/it/istituti_penitenziari">schede di trasparenza</a> pubblicate dal Ministero della Giustizia e aggiornate giornalmente, a livello di ogni singolo istituto penitenziario; diversamente, i dati sulle morti dei detenuti provengono da <a href="http://www.ristretti.it/areestudio/disagio/ricerca/">Ristretti Orizzonti</a>. <br>
-        Gli script girano automaticamente giornalmente e, in base alla presenza di nuovi dati, le relative dashboard si aggiornano di conseguenza. Il codice si trova su <a href="https://github.com/davidoffdado/sovraffollamento-carcerario"> GitHub </a>. <br>
-        Se pensi ci possano essere degli errori o vuoi utilizzare i dati (sei libero di farlo, ma mi farebbe piacere saperlo) puoi contattarmi qui <a href="mailto:davidruffini98@gmail.com">davidruffini98@gmail.com</a> o nei canali social presenti nel mio sito personale. <br>
-        Prima dell'utilizzo dei dati, l'invito è a effettuare una verifica sulla coerenza tra quello che c'è sulla dashboard e ciò che è presente nelle fonti dei dati viste sopra.
-        </p>
-        </div>
-        
-        
-        
-        <div class="chart-section">
-        <h2>La mappa delle carceri</h2>
-        <div class="chart">
-        <div style="min-height:719px" id="datawrapper-vis-ZOPZS">
-        <script type="text/javascript" defer src="https://datawrapper.dwcdn.net/ZOPZS/embed.js" charset="utf-8" data-target="#datawrapper-vis-ZOPZS"></script>
-        <noscript><img src="https://datawrapper.dwcdn.net/ZOPZS/full.png" alt="" /></noscript>
-        </div>
-        </div>
-        <p class="comment">La mappa permette di visualizzare le carceri su due dimensioni: quella geografica e quella numerica. Quest'ultima è rappresentata da due misure importanti: il numero dei detenuti totali, rappresentato dalle dimensioni di ciascun cerchio, e il tasso di sovraffollamento, evidenziato dal colore. </p>
-        </div>
 
-  <!-- Esempio di un secondo grafico -->
-  <div class="chart-section">
-    <h2>Come varia il tasso di sovraffollamento?</h2>
-    <div class="chart">
+        </style>
+
+    </head>
+    <body>
+        
+      <h1> Lo stato delle carceri italiane </h1>
+      <hr style="border: none; height: 2px; background-color: #444; margin: 20px 0;">
+      <!-- <h5> Monitoraggio dello stato dei penitenziari italiani e delle morti avvenute all'interno delle carceri, attraverso i dati del Ministero della Giustizia e di Ristretti Orizzonti </h5> -->
+      
+      <!-- INTRODUZIONE -->
+      <div class="chart-section">
+      <h2>Come nasce il progetto?</h2>
+      <p>
+      Il lavoro presente in questo sito è realizzato da <a href="https://www.davidruffini.com/"> David Ruffini </a> e vuole mostrare lo stato delle carceri italiane, ormai da anni caratterizzate da un sovraffollamento grave che si ripercuote sia sui deteneti che sugli altri operatori presenti negli istituti. <br>
+      Un altro elemento che si vuole approfondire è quello dei suicidi. Solamente nel 2024, sono stati 92 i detenuti che si sono tolti la vita all'interno delle mura carcerarie, segnando il numero più elevato dal 2002 a oggi. <br>
+      Tecnicamente, il progetto sfrutta due script in R: uno raccoglie i dati relativi al sovraffollamento, mentre l'altro si occupa dei dati sulle morti. I dati riguardanti il sovraffollamento provengono dalle <a href="https://www.giustizia.it/giustizia/page/it/istituti_penitenziari">schede di trasparenza</a> pubblicate dal Ministero della Giustizia e aggiornate giornalmente, a livello di ogni singolo istituto penitenziario; diversamente, i dati sulle morti dei detenuti provengono da <a href="http://www.ristretti.it/areestudio/disagio/ricerca/">Ristretti Orizzonti</a>. <br>
+      Gli script girano automaticamente giornalmente e, in base alla presenza di nuovi dati, le relative dashboard si aggiornano di conseguenza. Il codice si trova su <a href="https://github.com/davidoffdado/sovraffollamento-carcerario"> GitHub </a>. <br>
+      Se pensi ci possano essere degli errori o vuoi utilizzare i dati (sei libero di farlo, ma mi farebbe piacere saperlo) puoi contattarmi qui <a href="mailto:davidruffini98@gmail.com">davidruffini98@gmail.com</a> o nei canali social presenti in fondo alla pagina. <br>
+      Prima dell'utilizzo dei dati, l'invito è a effettuare una verifica sulla coerenza tra quello che c'è sulla dashboard e ciò che è presente nelle fonti dei dati viste sopra.
+      </p>
+      </div>
+      
+      <!-- PREMESSA -->
+      <div class="chart-section">
+      <h2>Come si interpreta il tasso di sovraffollamento carcerario?</h2>
+      <p>
+      La capienza regolamentare di ciascun istituto penitenziario è calcolata secondo il decreto emesso il 5 luglio 1975 dal Ministero della Sanità, adottato dalla circolare del Dipartimento dell'Amministrazione Penitenziaria del 17 novembre 1988, in base al quale ciascuna cella singola non può essere inferiore ai 9 metri quadrati e, in presenza, di multiple, sono necessari altri 5 metri quadrati per ciascun detenuto. Un dettaglio da sottolineare è che il decreto del Ministero della Sanità riguardava il settore abitativo nel suo complesso e riteneva che le <u> <b>  stanze da letto </b> </u> non dovessero avere misure minori di 9 metri quadrati, non nominando affatto la situazione di un detenuto costretto a vivere quasi tutto il giorno nella sua cella. <br>
+      Una volta a conoscenza della capienza regolamentare, stabilita per legge e fissata nel 2024 a 52.180 posti, è necessario sottrarre i posti non disponibili a causa di lavori di ristrutturazione o per inagibilità, che nel 2024 sono stati pari a 4.000. Calcolando la differenza tra 52.180 e 4.000 posti, si ottiene il denominatore del tasso di sovraffollamento, calcolato come rapporto tra il totale dei detenuti e il numero effettivamente disponibile di posti. La metodologia da applicare per ogni singolo istituto penitenziario è la stessa; infatti, sarà sufficiente considerare il totale dei detenuti di quel carcere e i suoi posti effettivamente disponibili. <br>
+      Il rapporto tra le due quantità fornirà un valore limitato inferiormente dallo 0 (nessuno detenuto presente) e, teoricamente, limitato superiormente solamente in base alla grandezza del numero di detenuti totali. Nella pratica, il tasso di sovraffollamento oscilla tra 0 e 2.5, per poi venire espresso in formato percentuale. <br>
+      </p>
+      <ul>
+        <li> Un tasso di sovraffollamento pari a 100% significa che il totale dei detenuti eguaglia il numero di posti disponibili: non c'è alcun sovraffollamento. </li>
+        <li> Un tasso di sovraffollamento pari a 200% significa che il totale dei detenuti è il doppio del numero di posti disponibili: se una cella prevede 3 persone, ce ne saranno 6. </li>
+        <li> Un tasso di sovraffollamento pari a 133% significa che il totale dei detenuti è 1,33 volte il numero di posti disponibili: se una cella prevede 3 persone, ce ne saranno 4. </li>
+      </ul>
+
+      </div>
+   
+      <!-- MAPPA CARCERI -->
+      <div class="chart-section">
+      <div class="chart">
+      <div style="min-height:719px" id="datawrapper-vis-ZOPZS">
+      <script type="text/javascript" defer src="https://datawrapper.dwcdn.net/ZOPZS/embed.js" charset="utf-8" data-target="#datawrapper-vis-ZOPZS"></script>
+      <noscript><img src="https://datawrapper.dwcdn.net/ZOPZS/full.png" alt="" /></noscript>
+      </div>
+      </div>
+      <p class="comment">La mappa permette di visualizzare le carceri su due dimensioni: quella geografica e quella numerica. Quest'ultima è rappresentata da due misure importanti: il numero dei detenuti totali, rappresentato dalle dimensioni di ciascun cerchio, e il tasso di sovraffollamento, evidenziato dal colore. </p>
+      </div>
+      
+      <!-- MAPPA REGIONI -->
+      <div class="chart-section">
+      <div class="chart">
+      <div style="min-height:747px" id="datawrapper-vis-EJ9Dm"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/EJ9Dm/embed.js" charset="utf-8" data-target="#datawrapper-vis-EJ9Dm"></script><noscript><img src="https://datawrapper.dwcdn.net/EJ9Dm/full.png" alt="" /></noscript></div>
+      <p class="comment">Successivamente alla raccolta dei dati relativi a ogni singolo carcere, è stata realizzata un'aggregazione a livello regionale, in modo da comprendere al meglio quali siano le zone italiane più colpite dalla congestione carceraria.</p>
+      </div>
+      </div>
+
+      <!-- TASSO DI SOVRAFFOLLAMENTO NAZIONALE -->
+      <div class="chart-section">
+      <div class="chart">
       <div style="min-height:396px" id="datawrapper-vis-71MG8"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/71MG8/embed.js" charset="utf-8" data-target="#datawrapper-vis-71MG8"></script><noscript><img src="https://datawrapper.dwcdn.net/71MG8/full.png" alt="" /></noscript></div>
-    </div>
-    <p class="comment">La raccolta dei dati è iniziata il 15 giugno 2025, quindi le informazioni partono da quel giorno e registrano giornalmente il tasso di sovraffollamento carcerario a livello nazionale, calcolato come il totale dei detenuti diviso la differenza tra il totale dei posti regolamentari e il totale dei posti non disponibili.</p>
-  </div>
-  
-    <!-- Esempio di un secondo grafico -->
-  <div class="chart-section">
-    <h2>Tutte le carceri italiani</h2>
-    <div class="chart">
+      </div>
+      <p class="comment">La raccolta dei dati è iniziata il 15 giugno 2025, quindi le informazioni partono da quel giorno e registrano giornalmente il tasso di sovraffollamento carcerario a livello nazionale, calcolato come il totale dei detenuti diviso la differenza tra il totale dei posti regolamentari e il totale dei posti non disponibili, o, più semplicemente, come il rapporto tra il totale dei detenuti e il totale dei posti effettivamente disponibili. </p>
+      </div>
+
+      <!-- TABELLA CARCERI -->
+      <div class="chart-section">
+      <div class="chart">
       <div style="min-height:835px" id="datawrapper-vis-nd1Uw"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/nd1Uw/embed.js" charset="utf-8" data-target="#datawrapper-vis-nd1Uw"></script><noscript><img src="https://datawrapper.dwcdn.net/nd1Uw/full.png" alt="" /></noscript></div>
-    </div>
-    <p class="comment">La tabella, dotata della possibilità di ricercare, mostra tutte le carceri italiane e altri dati ritenuti importanti. Il tasso di sovraffollamento è colorato in base alla sua gravità.</p>
-  </div>
-  
-      <!-- Esempio di un secondo grafico -->
-  <div class="chart-section">
-    <h2>La carenza di polizia penitenziaria</h2>
-    <div class="chart">
-<div style="min-height:3646px" id="datawrapper-vis-wWADv"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/wWADv/embed.js" charset="utf-8" data-target="#datawrapper-vis-wWADv"></script><noscript><img src="https://datawrapper.dwcdn.net/wWADv/full.png" alt="" /></noscript></div>    
-    </div>
-    <p class="comment">Un altro grave problema legato alle carceri italiane è la carenza di personale. Nel grafico, sono mostrate le unità previste e quelle effettive, mentre il valore numerico enunciato rappresenta lo scarto tra le stesse: un valore negativo esprime un deficit di personale.</p>
-  </div>
-  
-        <!-- Esempio di un secondo grafico -->
-  <div class="chart-section">
-    <h2>Le morti nelle carceri italiane</h2>
-    <div class="chart">
-<div style="min-height:306px" id="datawrapper-vis-jJ6Cd"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/jJ6Cd/embed.js" charset="utf-8" data-target="#datawrapper-vis-jJ6Cd"></script><noscript><img src="https://datawrapper.dwcdn.net/jJ6Cd/full.png" alt="" /></noscript></div>    </div>
-    <p class="comment">La causa principale di morte nei penitenziari italiani resta il suicidio.</p>
-  </div>
-  
-          <!-- Esempio di un secondo grafico -->
-  <div class="chart-section">
-    <h2>Le morti nelle carceri italiane</h2>
-    <div class="chart">
+      </div>
+      <p class="comment">La tabella, dotata della possibilità di ricercare, mostra tutte le carceri italiane e altri dati ritenuti importanti. Il tasso di sovraffollamento è colorato in base alla sua gravità.</p>
+      </div>
+
+      <!-- CARENZA POLIZIA PENITENZIARIA -->
+      <div class="chart-section">
+      <h2>La carenza di polizia penitenziaria</h2>
+      <div class="chart">
+      <div style="min-height:3646px" id="datawrapper-vis-wWADv"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/wWADv/embed.js" charset="utf-8" data-target="#datawrapper-vis-wWADv"></script><noscript><img src="https://datawrapper.dwcdn.net/wWADv/full.png" alt="" /></noscript></div>    
+      </div>
+      <p class="comment">Un altro grave problema legato alle carceri italiane è la carenza di personale. Nel grafico, sono mostrate le unità previste e quelle effettive, mentre il valore numerico enunciato rappresenta lo scarto tra le stesse: un valore negativo esprime un deficit di personale.</p>
+      </div>
+
+      <!-- CAUSE DI MORTE -->
+      <div class="chart-section">
+      <div class="chart">
+      <div style="min-height:306px" id="datawrapper-vis-jJ6Cd"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/jJ6Cd/embed.js" charset="utf-8" data-target="#datawrapper-vis-jJ6Cd"></script><noscript><img src="https://datawrapper.dwcdn.net/jJ6Cd/full.png" alt="" /></noscript></div>    </div>
+      <p class="comment">La causa principale di morte nei penitenziari italiani resta il suicidio.</p>
+      </div>
+
+
+      <!-- SUICIDI -->
+      <div class="chart-section">
+      <h2>Le morti nelle carceri italiane</h2>
+      <div class="chart">
       <div style="min-height:412px" id="datawrapper-vis-Yrawu"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/Yrawu/embed.js" charset="utf-8" data-target="#datawrapper-vis-Yrawu"></script><noscript><img src="https://datawrapper.dwcdn.net/Yrawu/full.png" alt="" /></noscript></div>
-    <p class="comment">Il 2024 ha segnato il numero più elevato di suicidi negli istituti penitenziari italiani.</p>
-  </div>
-  
+      <p class="comment">Il 2024 ha segnato il numero più elevato di suicidi negli istituti penitenziari italiani.</p>
+      </div>
+      </div>
+      
+      <!-- CONTATTI SOCIAL -->
+      <div class="social">
+      <ul>
+      <li><a href="https://twitter.com/davidruffini_" target="_blank"><i class="fa fa-twitter fa-2x"></i></a></li>
+      <li><a href="https://www.instagram.com/david_ruffini/" target="_blank"><i class="fa fa-instagram fa-2x"></i></a></li>
+      <li><a href="https://www.linkedin.com/in/david-ruffini-56a5a1161/" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a></li>
+      </ul> 
+      </div>
   
 
-</body>
-</html>
+    </body>
+  </html>
