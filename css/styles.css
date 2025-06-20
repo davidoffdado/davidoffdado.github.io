@@ -240,6 +240,40 @@ span.subhead {
 	text-decoration: underline;
 }
 
+/* -------- COLLABORAZIONI ----------*/
+
+#collaborazioni-section {
+	width: 70%;
+	margin: 0 auto;
+	display: none;
+}
+
+#headshot{
+	width: 50%;
+	float: left;
+}
+
+#bio {
+	font-size: 13.5px;
+	width: 42%;
+	float: right;
+}
+
+#bio span {
+	font-weight: bold;
+	font-size: 1.15em;
+	color: #000;
+}
+
+#bio a {
+	color: #4a8a9c;
+}
+
+#bio a:hover {
+	text-decoration: underline;
+}
+
+
 
 /*------- SOCIAL ICONS ----------*/
 
