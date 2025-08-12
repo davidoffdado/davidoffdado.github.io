@@ -1,178 +1,245 @@
 <!doctype html>
 <html lang="it">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Scrollytelling – Attacchi in Ucraina (punti, vittime, feriti, choropleth) – Flourish</title>
-    <style>
-      :root{
-        --bg:#fff; --panel:#111319; --ink:#0b0c10; --muted:#6b7280; --accent:#0ea5e9;
-        --maxw:1100px; --g:28px; --radius:18px;
-      }
-      html,body{height:100%;}
-      body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
-      .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;color:black}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scrollytelling – Attacchi in Ucraina – Flourish</title>
+  <style>
+    :root{
+      --bg:#fff; --panel:#111319; --ink:#0b0c10; --muted:#6b7280; --accent:#0ea5e9;
+      --maxw:1100px; --g:28px; --radius:18px;
+      --stage-h: 80vh;      /* desktop fallback */
+      --stage-h-m: 75svh;   /* mobile modern (small viewport height) */
+      --top: 16px;          /* sticky offset */
+    }
 
-      .grid{display:grid;grid-template-columns: 1fr 1fr;gap:var(--g);align-items:start;}
-      .graphic{position:sticky;top:24px;background:white;border-radius:var(--radius);padding:18px;min-height:70vh;display:flex;flex-direction:column;gap:10px;}
-      .stage{flex:1;display:grid;background:white;}
-      .caption{color:black;font-size:.95rem}
+    html,body{height:100%;}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;color:black}
 
-      .steps{display:flex;flex-direction:column;gap:80vh; padding-bottom:60vh;}
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr; /* mappa un po' più grande su desktop */
+      gap:var(--g);
+      align-items:start;
+    }
 
-      .step{background: rgba(0, 0, 0, 0.6);
-        border:1px solid rgba(0,0,0,0.6);
-        border-radius:var(--radius);
-        padding:18px;
-        box-shadow:none;}
-      .step h3{margin:0 0 6px;font-size:1.15rem;}
-      .step p{margin:.25rem 0 .75rem;color:#e5e7eb}
+    .graphic{
+      position:sticky;
+      top:var(--top);
+      background:white;
+      border-radius:var(--radius);
+      padding:18px;
+      min-height:calc(var(--stage-h) + 76px); /* stage + caption */
+      display:flex;flex-direction:column;gap:10px;
+      box-shadow: 0 1px 0 rgba(0,0,0,.04);
+    }
+    .stage{
+      position:relative;   /* necessario per impilare gli iframe */
+      min-height:var(--stage-h);
+      background:white;
+      border-radius:12px;
+      overflow:hidden;
+    }
 
-      .progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--accent);z-index:10;}
-      .toast{position:fixed;right:16px;bottom:16px;background:#151824;border:1px solid #23283a;color:#e8ecf1;padding:10px 12px;border-radius:10px;max-width:360px;display:none}
-
-      @media (max-width: 900px){
-        .grid{grid-template-columns:1fr;}
-        .graphic{position:relative;top:auto;}
-        .steps{gap:60vh;padding-bottom:40vh}
-      }
-
-      @media (prefers-reduced-motion: reduce){
-        *{transition:none !important;animation:none !important}
-      }
-    </style>
-  </head>
-  <body>
-    <div class="progress" aria-hidden="true"></div>
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-    <header class="wrap" style="padding-top:40px;padding-bottom:10px">
-      <h1 style="margin:0 0 8px">I double tap dell'esercito russo</h1>
-      <p style="margin:0;color:black">Le forze armate del Cremlino, dall'inizio dell'invasione russa, hanno fatto un massiccio uso della tecnica dei double tap: una tipologia di attacco che prevede due colpi ravvicinati temporalmente, al fine di infliggere un maggior danno a coloro che arrivano a soccorrere i feriti del primo attaco. </p>
-    </header>
-
-    <main class="wrap grid" id="app">
-      <section class="graphic" aria-describedby="live-announce">
-      <div class="stage">
-        <iframe
-          id="flourishFrame"
-          src="https://public.flourish.studio/visualisation/24523202/embed"
-          title="Flourish map"
-          style="width:100%;height:100vh;border:0;border-radius:12px;overflow:hidden"
-          scrolling="no"
-          allowfullscreen>
-        </iframe>
-      </div>
-        <p class="caption" id="modeLabel">Tutti i double tap</p>
-        <div id="live-announce" class="sr-only" aria-live="polite"></div>
-      </section>
-
-      <section class="steps" aria-label="Passaggi della storia">
-        <article class="step" data-step="0">
-          <p style="margin:0;color:white">Ucraina, oblast di Kharkiv, primo marzo del 2022. Sono passati sette giorni dall’inizio dell’invasione russa, quando, alle 08:01 del mattino, un Tupolev Tu-22 sgancia un missile Kalibr sul palazzo governativo di Kharkiv, devastando l’area antistante. Dodici minuti dopo, alle 08:13, un secondo missile colpisce il tetto dell’edificio, ponendo fine a un attacco che causa 31 morti e oltre 35 feriti.</p>
-        </article>
-              <article class="step" data-step="0">
-              <p style="margin:0;color:white">
-              Ucraina, oblast di Odessa, quindici marzo del 2024. Sono le 11:03 del mattino; un missile 9M723 colpisce il distretto di Kyivskyi, distruggendo edifici civili, uccidendo e ferendo un numero non quantificato di persone. Medici, soccorritori e agenti della polizia intervengono nel luogo dell’attacco e, alle 11:37, un secondo missile cade tra le macerie e gli operatori accorsi in aiuto: il bilancio totale è di 21 morti e 75 feriti.
-              </p>
-              </article>
-              <article class="step" data-step="0">
-              <p style="margin:0;color:white">
-              La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione.
-              </p>
-              </article>
-              <article class="step" data-step="1">
-              <h3>Tutti i double tap</h3>
-              <p style="margin:0;color:white">Visualizziamo ogni attacco come una sfera della stessa dimensione. Clicca per leggere dettagli, data e note.</p>
-              </article>
-              <article class="step" data-step="1">
-              <h3>Step 2 · Vittime</h3>
-              <p style="margin:0;color:white">Le sfere crescono proporzionalmente al numero totale di vittime registrate per quell’evento.</p>
-              </article>
-              <article class="step" data-step="2">
-              <p style="margin:0;color:white">
-              La strategia non nasce nella guerra moderna, basata sui bombardamenti aerei, bensì nel 1930, da William Ewart Fairbairn e Eric A. Sykes, due soldati che volevano compensare il minor danno arrecato dai proiettili incamiciati, gli unici considerati ammissibili dai trattati internazionali stilati all’Aia nel 1899 e nel 1907. Accordi internazionali che, allo stesso tempo, vietano l’adozione dei proiettili a espansione, cioè contenenti una pallottola che esplode una volta all’interno del corpo della vittima.
-              </p>
-              </article>
-              <article class="step" data-step="2">
-              <h3>Step 3 · Feriti</h3>
-              <p style="margin:0;color:white">Le sfere ora scalano in base ai feriti.</p>
-              </article>
-              <article class="step" data-step="3">
-              <h3>Step 4 · Choropleth per regione</h3>
-              <p style="margin:0;color:white">Aggregazione per oblast: il colore indica quanti attacchi hanno colpito la regione.</p>
-              </article>
-      </section>
-    </main>
-    
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const stage = document.querySelector(".stage");
-  const modeLabel = document.getElementById("modeLabel");
-
-  // 1) Mappa step → info grafico (titolo facoltativo)
-  const charts = {
-    0: { url: "https://public.flourish.studio/visualisation/24523202/embed", label: "Tutti i double tap" },
-    1: { url: "https://public.flourish.studio/visualisation/24645012/embed", label: "Vittime" },
-    2: { url: "https://public.flourish.studio/visualisation/24645168/embed", label: "Feriti" },
-    3: { url: "https://public.flourish.studio/visualisation/24645283/embed", label: "Choropleth per regione" } 
-  };
-
-  // 2) Crea tutti gli iframe in stack (precaricati)
-  const frames = {};
-  Object.entries(charts).forEach(([key, { url }], idx) => {
-    const f = document.createElement("iframe");
-    f.src = url;
-    f.title = `Flourish ${key}`;
-    f.loading = idx === 0 ? "eager" : "lazy";
-    f.setAttribute("scrolling", "no");
-    f.setAttribute("allowfullscreen", "");
-    // sandbox per evitare che l'embed provi a "uscire" dalla pagina
-    // (Flourish ha bisogno di script+same-origin; niente top-navigation)
-    f.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
-    f.style.cssText = `
+    /* Iframe in stack: solo quello attivo è visibile/cliccabile */
+    .stage iframe{
       position:absolute; inset:0; width:100%; height:100%;
-      border:0; border-radius:12px; opacity:${idx===0?1:0};
+      border:0; border-radius:12px;
+      opacity:0; pointer-events:none;
       transition:opacity .35s ease;
-      pointer-events:${idx===0?"auto":"none"};
-    `;
-    frames[key] = f;
-    stage.appendChild(f);
-  });
+    }
+    .stage iframe.active{
+      opacity:1; pointer-events:auto;
+    }
 
-  // 3) Funzione per attivare un frame
-  let currentKey = "0";
-  const activate = (key) => {
-    if (!frames[key] || key === currentKey) return;
-    const prev = frames[currentKey];
-    const next = frames[key];
-    // fade
-    prev.style.opacity = 0;
-    prev.style.pointerEvents = "none";
-    next.style.opacity = 1;
-    next.style.pointerEvents = "auto";
-    currentKey = key;
+    .caption{color:black;font-size:.95rem}
 
-    // aggiorna etichetta (se presente)
-    if (modeLabel && charts[key]?.label) modeLabel.textContent = charts[key].label;
-  };
+    /* Steps */
+    .steps{display:flex;flex-direction:column;gap:85vh; padding-bottom:60vh;}
+    .step{
+      background: rgba(0, 0, 0, 0.65);
+      border:1px solid rgba(0,0,0,0.55);
+      border-radius:var(--radius);
+      padding:18px;
+      color:#e5e7eb;
+      box-shadow:none;
+      backdrop-filter: blur(2px);
+      transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+    .step h3{margin:0 0 6px;font-size:1.15rem;color:#fff}
+    .step p{margin:.25rem 0 .75rem;color:#e5e7eb}
+    .step.is-active{
+      box-shadow: 0 6px 24px rgba(0,0,0,.18);
+      transform: translateY(-2px);
+      background: rgba(0,0,0,0.72);
+    }
 
-  // 4) IntersectionObserver sugli step
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const key = entry.target.dataset.step;
-      if (key in charts) activate(key);
+    .progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--accent);z-index:10;transition:width .1s linear;}
+    .toast{position:fixed;right:16px;bottom:16px;background:#151824;border:1px solid #23283a;color:#e8ecf1;padding:10px 12px;border-radius:10px;max-width:360px;display:none}
+
+    /* Utility: sr-only */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+    /* Mobile */
+    @media (max-width: 900px){
+      .wrap{padding:18px}
+      .grid{grid-template-columns:1fr;}
+      .graphic{
+        position:sticky; /* resta sticky anche su mobile */
+        top:var(--top);
+        min-height:calc(var(--stage-h-m) + 70px);
+        padding:14px;
+      }
+      .stage{min-height:var(--stage-h-m);}
+      .steps{gap:65svh; padding-bottom:50svh}
+      .step{padding:16px;}
+    }
+
+    /* Riduzione movimento */
+    @media (prefers-reduced-motion: reduce){
+      *{transition:none !important;animation:none !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <header class="wrap" style="padding-top:40px;padding-bottom:10px">
+    <h1 style="margin:0 0 8px">I double tap dell'esercito russo</h1>
+    <p style="margin:0;color:black">Le forze armate del Cremlino, dall'inizio dell'invasione russa, hanno fatto un massiccio uso della tecnica dei double tap: una tipologia di attacco che prevede due colpi ravvicinati temporalmente, al fine di infliggere un maggior danno a coloro che arrivano a soccorrere i feriti del primo attaco. </p>
+  </header>
+
+  <main class="wrap grid" id="app">
+    <section class="graphic" aria-describedby="live-announce">
+      <div class="stage" id="stage"></div>
+      <p class="caption" id="modeLabel">Tutti i double tap</p>
+      <div id="live-announce" class="sr-only" aria-live="polite"></div>
+    </section>
+
+    <section class="steps" aria-label="Passaggi della storia">
+      <article class="step" data-step="0">
+        <p style="margin:0;color:white">Ucraina, oblast di Kharkiv, primo marzo del 2022. Sono passati sette giorni dall’inizio dell’invasione russa, quando, alle 08:01 del mattino, un Tupolev Tu-22 sgancia un missile Kalibr sul palazzo governativo di Kharkiv, devastando l’area antistante. Dodici minuti dopo, alle 08:13, un secondo missile colpisce il tetto dell’edificio, ponendo fine a un attacco che causa 31 morti e oltre 35 feriti.</p>
+      </article>
+
+      <article class="step" data-step="0">
+        <p style="margin:0;color:white">Ucraina, oblast di Odessa, quindici marzo del 2024. Sono le 11:03 del mattino; un missile 9M723 colpisce il distretto di Kyivskyi, distruggendo edifici civili, uccidendo e ferendo un numero non quantificato di persone. Medici, soccorritori e agenti della polizia intervengono nel luogo dell’attacco e, alle 11:37, un secondo missile cade tra le macerie e gli operatori accorsi in aiuto: il bilancio totale è di 21 morti e 75 feriti.</p>
+      </article>
+
+      <article class="step" data-step="0">
+        <p style="margin:0;color:white">La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione.</p>
+      </article>
+
+      <article class="step" data-step="1">
+        <h3>Tutti i double tap</h3>
+        <p style="margin:0;color:white">Visualizziamo ogni attacco come una sfera della stessa dimensione. Clicca per leggere dettagli, data e note.</p>
+      </article>
+
+      <article class="step" data-step="1">
+        <h3>Step 2 · Vittime</h3>
+        <p style="margin:0;color:white">Le sfere crescono proporzionalmente al numero totale di vittime registrate per quell’evento.</p>
+      </article>
+
+      <article class="step" data-step="2">
+        <p style="margin:0;color:white">La strategia non nasce nella guerra moderna, basata sui bombardamenti aerei, bensì nel 1930, da William Ewart Fairbairn e Eric A. Sykes…</p>
+      </article>
+
+      <article class="step" data-step="2">
+        <h3>Step 3 · Feriti</h3>
+        <p style="margin:0;color:white">Le sfere ora scalano in base ai feriti.</p>
+      </article>
+
+      <article class="step" data-step="3">
+        <h3>Step 4 · Choropleth per regione</h3>
+        <p style="margin:0;color:white">Aggregazione per oblast: il colore indica quanti attacchi hanno colpito la regione.</p>
+      </article>
+    </section>
+  </main>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const stage = document.getElementById("stage");
+    const modeLabel = document.getElementById("modeLabel");
+    const announce = document.getElementById("live-announce");
+    const progressBar = document.querySelector(".progress");
+
+    /* Mappatura step → iframe Flourish */
+    const charts = {
+      0: { url: "https://public.flourish.studio/visualisation/24523202/embed", label: "Tutti i double tap" },
+      1: { url: "https://public.flourish.studio/visualisation/24645012/embed", label: "Vittime" },
+      2: { url: "https://public.flourish.studio/visualisation/24645168/embed", label: "Feriti" },
+      3: { url: "https://public.flourish.studio/visualisation/24645283/embed", label: "Choropleth per regione" }
+    };
+
+    /* Precarica gli iframe in stack (solo il primo attivo) */
+    const frames = {};
+    Object.entries(charts).forEach(([key,{url}],idx) => {
+      const f = document.createElement("iframe");
+      f.src = url;
+      f.title = charts[key]?.label || `Flourish ${key}`;
+      f.loading = idx === 0 ? "eager" : "lazy";
+      f.setAttribute("scrolling","no");
+      f.setAttribute("allowfullscreen","");
+      f.setAttribute("sandbox","allow-scripts allow-same-origin allow-popups");
+      if (idx === 0) f.classList.add("active");
+      stage.appendChild(f);
+      frames[key] = f;
     });
-  }, { threshold: 0.55, rootMargin: "0px 0px -20% 0px" });
 
-  document.querySelectorAll(".step").forEach(step => io.observe(step));
+    let currentKey = "0";
+    const activate = (key) => {
+      if (!(key in frames) || key === currentKey) return;
+      frames[currentKey]?.classList.remove("active");
+      frames[key].classList.add("active");
+      currentKey = key;
+      if (modeLabel && charts[key]?.label) modeLabel.textContent = charts[key].label;
+      if (announce) announce.textContent = `Vista cambiata: ${charts[key]?.label || "grafico"}.`;
+    };
 
-  // 5) CSS di supporto per lo stack (assicurati che .stage sia position:relative)
-  stage.style.position = "relative";
-});
-</script>
+    /* Evidenzia step attivo + cambio grafico quando entra a metà viewport */
+    const steps = Array.from(document.querySelectorAll(".step"));
 
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        if (entry.isIntersecting) {
+          el.classList.add("is-active");
+          const key = el.dataset.step;
+          if (key in charts) activate(key);
+        } else {
+          el.classList.remove("is-active");
+        }
+      });
+    }, {
+      threshold: 0.55,
+      root: null,
+      /* un po' di margine in basso per mobile per “agganciare” meglio */
+      rootMargin: "0px 0px -15% 0px"
+    });
+    steps.forEach(s => io.observe(s));
 
-  </body>
+    /* Barra di progresso scroll */
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const height = doc.scrollHeight - doc.clientHeight;
+      const p = height > 0 ? (scrollTop / height) * 100 : 0;
+      if (progressBar) progressBar.style.width = `${p}%`;
+    };
+    document.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    /* Fix viewport unit su iOS vecchi: aggiorna una variabile se vuoi usarla */
+    const updateVHVar = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh-fix', `${vh}px`);
+    };
+    updateVHVar();
+    window.addEventListener('resize', updateVHVar);
+  });
+  </script>
+</body>
 </html>
+
