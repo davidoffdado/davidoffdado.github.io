@@ -8,19 +8,105 @@
     :root{
       --bg:#fff; --panel:#111319; --ink:#0b0c10; --muted:#6b7280; --accent:#0ea5e9;
       --maxw:1100px; --g:28px; --radius:18px;
-      --stage-h: 80vh;      /* desktop fallback */
-      --stage-h-m: 75svh;   /* mobile modern (small viewport height) */
-      --top: 16px;          /* sticky offset */
+      --stage-h: 80vh;
+      --stage-h-m: 75svh;
+      --top: 16px;
+      --hero-h: clamp(280px, 52vh, 600px);
     }
 
-    html,body{height:100%;}
-    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;color:black}
+    html,body{
+      height:100%;
+      overflow-x:hidden; /* evita shift orizzontali */
+    }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    }
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:24px;
+      color:black
+    }
 
-    /* Layout */
+    /* ===== Full-bleed con fix scrollbar ===== */
+    .full-bleed{
+      width:100vw;
+      position:relative;
+      left:50%;
+      margin-left:-50vw;
+      margin-right:-50vw;
+    }
+    @supports (width: 100dvw) {
+      .full-bleed{
+        width:100dvw;
+        margin-left:calc(50% - 50dvw);
+        margin-right:calc(50% - 50dvw);
+      }
+    }
+
+    /* ===== HERO overlay ===== */
+    .hero{
+      position:relative;
+      background:#000;
+      margin:0 0 18px;
+    }
+    .hero img{
+      display:block;
+      width:100%;
+      /* height:var(--hero-h); */
+      height: 100%;
+      object-fit:cover;
+      object-position:center;
+    }
+    .hero .overlay{
+      position:absolute; inset:0;
+      display:flex; align-items:flex-end;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.45) 40%,
+        rgba(0,0,0,0.15) 70%,
+        rgba(0,0,0,0) 100%
+      );
+    }
+    .hero .inner{
+      width:100%;
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:24px;
+      color:#fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,.35);
+    }
+    .hero h1{
+      margin:0 0 8px;
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      line-height:1.1;
+      letter-spacing:.2px;
+      font-weight:800;
+    }
+    .hero p.sub{
+      margin:0;
+      max-width:min(80ch, 90%);
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      line-height:1.4;
+      color:#f3f4f6;
+    }
+    .hero .credit{
+      position:absolute; right:14px; top:14px;
+      color:#e5e7eb; font-size:.8rem; opacity:.9;
+      background: rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.18);
+      padding:6px 8px; border-radius:8px;
+      backdrop-filter: blur(2px);
+    }
+
+    /* Layout principale */
     .grid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr; /* mappa un po' più grande su desktop */
+      grid-template-columns: 1.15fr .85fr;
       gap:var(--g);
       align-items:start;
     }
@@ -31,28 +117,24 @@
       background:white;
       border-radius:var(--radius);
       padding:18px;
-      min-height:calc(var(--stage-h) + 76px); /* stage + caption */
+      min-height:calc(var(--stage-h) + 76px);
       display:flex;flex-direction:column;gap:10px;
       box-shadow: 0 1px 0 rgba(0,0,0,.04);
     }
     .stage{
-      position:relative;   /* necessario per impilare gli iframe */
+      position:relative;
       min-height:var(--stage-h);
       background:white;
       border-radius:12px;
       overflow:hidden;
     }
-
-    /* Iframe in stack: solo quello attivo è visibile/cliccabile */
     .stage iframe{
       position:absolute; inset:0; width:100%; height:100%;
       border:0; border-radius:12px;
       opacity:0; pointer-events:none;
       transition:opacity .35s ease;
     }
-    .stage iframe.active{
-      opacity:1; pointer-events:auto;
-    }
+    .stage iframe.active{ opacity:1; pointer-events:auto; }
 
     .caption{color:black;font-size:.95rem}
 
@@ -79,15 +161,91 @@
     .progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--accent);z-index:10;transition:width .1s linear;}
     .toast{position:fixed;right:16px;bottom:16px;background:#151824;border:1px solid #23283a;color:#e8ecf1;padding:10px 12px;border-radius:10px;max-width:360px;display:none}
 
-    /* Utility: sr-only */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
+    /* ===== Colonna centrale stile giornale ===== */
+.prose-wrap{
+  max-width: 70ch;         /* misura della riga “da giornale” */
+  margin: 10px auto 28px;  /* centrata */
+  padding: 0 24px;         /* respiro ai lati */
+  color: var(--ink);
+}
+.prose-wrap .kicker{
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-weight: 700;
+  color: var(--muted);
+  font-size: .85rem;
+  margin: 0 0 6px;
+}
+.prose-wrap h2{
+  margin: 0 0 10px;
+  font-size: clamp(1.6rem, 3.2vw, 2rem);
+  line-height: 1.2;
+}
+.prose{
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.prose p{ margin: 0 0 1.05em; }
+.prose p.lead{
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #1f2937;
+}
+.prose .byline{
+  margin: .3rem 0 1rem;
+  color: #6b7280;
+  font-size: .95rem;
+}
+.prose .dropcap:first-letter{
+  float: left;
+  font-size: 3.2em;
+  line-height: .85;
+  padding: .06em .12em 0 .02em;
+  margin-right: .06em;
+  font-weight: 700;
+  color: #111;
+}
+.prose figure{
+  margin: 1rem 0;
+}
+.prose figure img{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+.prose figure figcaption{
+  font-size: .9rem;
+  color: #6b7280;
+  margin-top: .35rem;
+}
+.prose blockquote{
+  margin: 1.2rem 0;
+  padding: .6rem .9rem;
+  border-left: 4px solid var(--accent);
+  background: #f8fafc;
+  color: #111827;
+  border-radius: 8px;
+  font-style: italic;
+}
+.prose ul, .prose ol{ margin: 0 0 1rem 1.25rem; }
+.prose hr{
+  border: 0;
+  height: 1px;
+  background: rgba(0,0,0,.08);
+  margin: 1.25rem 0;
+}
+    
+    
+    
     /* Mobile */
     @media (max-width: 900px){
       .wrap{padding:18px}
       .grid{grid-template-columns:1fr;}
       .graphic{
-        position:sticky; /* resta sticky anche su mobile */
+        position:sticky;
         top:var(--top);
         min-height:calc(var(--stage-h-m) + 70px);
         padding:14px;
@@ -95,9 +253,10 @@
       .stage{min-height:var(--stage-h-m);}
       .steps{gap:65svh; padding-bottom:50svh}
       .step{padding:16px;}
+      .hero .inner{padding:18px;}
+      .hero .credit{right:10px; top:10px;}
     }
 
-    /* Riduzione movimento */
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important;animation:none !important}
     }
@@ -107,10 +266,48 @@
   <div class="progress" aria-hidden="true"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <header class="wrap" style="padding-top:40px;padding-bottom:10px">
-    <h1 style="margin:0 0 8px">I double tap dell'esercito russo</h1>
-    <p style="margin:0;color:black">Le forze armate del Cremlino, dall'inizio dell'invasione russa, hanno fatto un massiccio uso della tecnica dei double tap: una tipologia di attacco che prevede due colpi ravvicinati temporalmente, al fine di infliggere un maggior danno a coloro che arrivano a soccorrere i feriti del primo attaco. </p>
-  </header>
+  <!-- HERO con overlay -->
+  <section class="hero" aria-labelledby="hero-title">
+    <img
+      src="https://mwi.westpoint.edu/wp-content/uploads/2021/04/Orlan-10_2.jpg?w=1200&h=640&crop=1"
+      alt="Veduta aerea con fumo e detriti dopo un’esplosione"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <span class="credit">Foto: autore / fonte</span>
+    <div class="overlay">
+      <div class="inner">
+        <h1 id="hero-title">I double tap dell'esercito russo</h1>
+        <p class="sub">Le forze armate del Cremlino, dall'inizio dell'invasione russa, hanno fatto un massiccio uso della tecnica dei double tap: due colpi ravvicinati per massimizzare danni e terrore, colpendo anche chi soccorre i feriti del primo attacco.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== Articolo in colonna centrale (prima di mappa+step) ===== -->
+<section class="prose-wrap" aria-labelledby="art-title">
+  <!-- <p class="kicker">Analisi</p> -->
+  <!-- <h2 id="art-title">La strategia dei “double tap” spiegata</h2> -->
+  <p class="byline">di David Ruffini · Aggiornato il 13 agosto 2025</p>
+
+  <!-- Aggiungi "columns-2" alla div .prose se vuoi due colonne su desktop -->
+  <div class="prose">
+   <!-- <p class="lead"></p> -->
+
+    <p class="dropcap">Ucraina, oblast di Kharkiv, primo marzo del 2022. Sono passati sette giorni dall’inizio dell’invasione russa, quando, alle 08:01 del mattino, un Tupolev Tu-22 sgancia un missile Kalibr sul palazzo governativo di Kharkiv, devastando l’area antistante. Dodici minuti dopo, alle 08:13, un secondo missile colpisce il tetto dell’edificio, ponendo fine a un attacco che causa 31 morti e oltre 35 feriti.</p>
+
+    <!-- <blockquote>“Il secondo colpo non è un errore: è parte del piano per seminare terrore e impedire i soccorsi tempestivi.”</blockquote> -->
+
+    <p>Ucraina, oblast di Odessa, quindici marzo del 2024. Sono le 11:03 del mattino; un missile 9M723 colpisce il distretto di Kyivskyi, distruggendo edifici civili, uccidendo e ferendo un numero non quantificato di persone. Medici, soccorritori e agenti della polizia intervengono nel luogo dell’attacco e, alle 11:37, un secondo missile cade tra le macerie e gli operatori accorsi in aiuto: il bilancio totale è di 21 morti e 75 feriti.</p>
+
+    <!-- <figure>
+      <img src="https://images.unsplash.com/photo-1487956382158-bb926046304a?q=80&w=1600&auto=format&fit=crop" alt="Operatori di soccorso tra le macerie">
+      <figcaption>Un team di soccorso durante le operazioni in area urbana. Foto di repertorio.</figcaption>
+    </figure> -->
+    
+  </div>
+</section>
+
 
   <main class="wrap grid" id="app">
     <section class="graphic" aria-describedby="live-announce">
@@ -121,36 +318,43 @@
 
     <section class="steps" aria-label="Passaggi della storia">
       <article class="step" data-step="0">
-        <p style="margin:0;color:white">Ucraina, oblast di Kharkiv, primo marzo del 2022. Sono passati sette giorni dall’inizio dell’invasione russa, quando, alle 08:01 del mattino, un Tupolev Tu-22 sgancia un missile Kalibr sul palazzo governativo di Kharkiv, devastando l’area antistante. Dodici minuti dopo, alle 08:13, un secondo missile colpisce il tetto dell’edificio, ponendo fine a un attacco che causa 31 morti e oltre 35 feriti.</p>
+            <div style="font-size:3rem; font-weight:800; line-height:1; color:white;">61</div>
+            <div style="font-size:1rem; color:white; opacity:0.9;">gli attacchi double tap individuati nell'analisi</div>
       </article>
-
       <article class="step" data-step="0">
-        <p style="margin:0;color:white">Ucraina, oblast di Odessa, quindici marzo del 2024. Sono le 11:03 del mattino; un missile 9M723 colpisce il distretto di Kyivskyi, distruggendo edifici civili, uccidendo e ferendo un numero non quantificato di persone. Medici, soccorritori e agenti della polizia intervengono nel luogo dell’attacco e, alle 11:37, un secondo missile cade tra le macerie e gli operatori accorsi in aiuto: il bilancio totale è di 21 morti e 75 feriti.</p>
+            <div style="font-size:3rem; font-weight:800; line-height:1; color:white;">17</div>
+            <div style="font-size:1rem; color:white; opacity:0.9;">le regioni colpite dagli attacchi</div>
       </article>
-
       <article class="step" data-step="0">
-        <p style="margin:0;color:white">La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione.</p>
+            <div style="font-size:3rem; font-weight:800; line-height:1; color:white;">I droni</div>
+            <div style="font-size:1rem; color:white; opacity:0.9;">sono lo strumento più utilizzato</div>
       </article>
+      
+     <div class="prose-wrap">
+  <div class="prose">
+    <p class="dropcap">La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione.</p>
+  </div>
+</div>
 
       <article class="step" data-step="1">
-        <h3>Tutti i double tap</h3>
-        <p style="margin:0;color:white">Visualizziamo ogni attacco come una sfera della stessa dimensione. Clicca per leggere dettagli, data e note.</p>
+            <div style="font-size:3rem; font-weight:800; line-height:1; color:white;">200+</div>
+            <div style="font-size:1rem; color:white; opacity:0.9;">le vittime provocate dagli attacchi double tap</div>
       </article>
-
+      <article class="step" data-step="1">
+            <div style="font-size:3rem; font-weight:800; line-height:1; color:white;">I soccorritori</div>
+            <div style="font-size:1rem; color:white; opacity:0.9;">sono le principali vittime dei secondi attacchi</div>
+      </article>
       <article class="step" data-step="1">
         <h3>Step 2 · Vittime</h3>
-        <p style="margin:0;color:white">Le sfere crescono proporzionalmente al numero totale di vittime registrate per quell’evento.</p>
+        <p style="margin:0;color:white">Le sfere crescono proporzionalmente al numero totale di vittime...</p>
       </article>
-
       <article class="step" data-step="2">
-        <p style="margin:0;color:white">La strategia non nasce nella guerra moderna, basata sui bombardamenti aerei, bensì nel 1930, da William Ewart Fairbairn e Eric A. Sykes…</p>
+        <p style="margin:0;color:white">La strategia non nasce nella guerra moderna...</p>
       </article>
-
       <article class="step" data-step="2">
         <h3>Step 3 · Feriti</h3>
         <p style="margin:0;color:white">Le sfere ora scalano in base ai feriti.</p>
       </article>
-
       <article class="step" data-step="3">
         <h3>Step 4 · Choropleth per regione</h3>
         <p style="margin:0;color:white">Aggregazione per oblast: il colore indica quanti attacchi hanno colpito la regione.</p>
@@ -165,7 +369,6 @@
     const announce = document.getElementById("live-announce");
     const progressBar = document.querySelector(".progress");
 
-    /* Mappatura step → iframe Flourish */
     const charts = {
       0: { url: "https://public.flourish.studio/visualisation/24523202/embed", label: "Tutti i double tap" },
       1: { url: "https://public.flourish.studio/visualisation/24645012/embed", label: "Vittime" },
@@ -173,7 +376,6 @@
       3: { url: "https://public.flourish.studio/visualisation/24645283/embed", label: "Choropleth per regione" }
     };
 
-    /* Precarica gli iframe in stack (solo il primo attivo) */
     const frames = {};
     Object.entries(charts).forEach(([key,{url}],idx) => {
       const f = document.createElement("iframe");
@@ -198,9 +400,7 @@
       if (announce) announce.textContent = `Vista cambiata: ${charts[key]?.label || "grafico"}.`;
     };
 
-    /* Evidenzia step attivo + cambio grafico quando entra a metà viewport */
     const steps = Array.from(document.querySelectorAll(".step"));
-
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const el = entry.target;
@@ -212,15 +412,9 @@
           el.classList.remove("is-active");
         }
       });
-    }, {
-      threshold: 0.55,
-      root: null,
-      /* un po' di margine in basso per mobile per “agganciare” meglio */
-      rootMargin: "0px 0px -15% 0px"
-    });
+    }, { threshold: 0.55, root: null, rootMargin: "0px 0px -15% 0px" });
     steps.forEach(s => io.observe(s));
 
-    /* Barra di progresso scroll */
     const onScroll = () => {
       const doc = document.documentElement;
       const scrollTop = doc.scrollTop || document.body.scrollTop;
@@ -231,7 +425,6 @@
     document.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    /* Fix viewport unit su iOS vecchi: aggiorna una variabile se vuoi usarla */
     const updateVHVar = () => {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh-fix', `${vh}px`);
@@ -242,4 +435,3 @@
   </script>
 </body>
 </html>
-
