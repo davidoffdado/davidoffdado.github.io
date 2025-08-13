@@ -258,6 +258,7 @@
     
     
     
+    
     /* Mobile */
     @media (max-width: 900px){
       .wrap{padding:18px}
@@ -278,6 +279,18 @@
     @media (prefers-reduced-motion: reduce){
       *{transition:none !important;animation:none !important}
     }
+    
+    @media (max-width: 900px) {
+  .stage.dimmed::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4); /* velo scuro semitrasparente */
+    backdrop-filter: blur(2px);
+    z-index: 2;
+    pointer-events: none;
+  }
+}
   </style>
 </head>
 <body>
@@ -427,13 +440,23 @@
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const el = entry.target;
-        if (entry.isIntersecting) {
-          el.classList.add("is-active");
-          const key = el.dataset.step;
-          if (key in charts) activate(key);
-        } else {
-          el.classList.remove("is-active");
-        }
+if (entry.isIntersecting) {
+  el.classList.add("is-active");
+  const key = el.dataset.step;
+  if (key in charts) activate(key);
+
+  // Se step "news-style" e siamo su mobile, sfuma mappa
+  if (el.classList.contains("news-style") && window.innerWidth <= 900) {
+    stage.classList.add("dimmed");
+  }
+} else {
+  el.classList.remove("is-active");
+
+  // Se step "news-style" e siamo su mobile, rimuovi sfumatura
+  if (el.classList.contains("news-style") && window.innerWidth <= 900) {
+    stage.classList.remove("dimmed");
+  }
+}
       });
     }, { threshold: 0.55, root: null, rootMargin: "0px 0px -15% 0px" });
     steps.forEach(s => io.observe(s));
