@@ -157,6 +157,24 @@
       transform: translateY(-2px);
       background: rgba(0,0,0,0.72);
     }
+    
+    /* Step in stile giornale: sfondo trasparente, testo nero */
+.step.news-style{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: #black; /* nero quasi pieno */
+}
+
+.step.news-style .prose{
+  color: #black; /* testo interno nero */
+}
+
+.step.news-style blockquote{
+  background: #f8fafc; /* leggero grigio chiaro per risalto */
+  color: #black;
+}
 
     .progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--accent);z-index:10;transition:width .1s linear;}
     .toast{position:fixed;right:16px;bottom:16px;background:#151824;border:1px solid #23283a;color:#e8ecf1;padding:10px 12px;border-radius:10px;max-width:360px;display:none}
@@ -335,6 +353,11 @@
     <p class="dropcap">La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione.</p>
   </div>
 </div>
+      <article class="step prose-wrap news-style" data-step="0">
+  <div class="prose">
+    <p class="dropcap" style="color:black;"> La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione</p>
+  </div>
+</article>
 
       <article class="step" data-step="1">
             <div style="font-size:3rem; font-weight:800; line-height:1; color:white;">200+</div>
