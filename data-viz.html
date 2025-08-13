@@ -280,17 +280,6 @@
       *{transition:none !important;animation:none !important}
     }
     
-    @media (max-width: 900px) {
-  .stage.dimmed::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.4); /* velo scuro semitrasparente */
-    backdrop-filter: blur(2px);
-    z-index: 2;
-    pointer-events: none;
-  }
-}
   </style>
 </head>
 <body>
@@ -361,11 +350,10 @@
             <div style="font-size:1rem; color:white; opacity:0.9;">sono lo strumento più utilizzato</div>
       </article>
       
-     <div class="prose-wrap">
-  <div class="prose">
+     <!-- <div class="prose-wrap"> <div class="prose">
     <p class="dropcap">La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione.</p>
   </div>
-</div>
+</div> -->
       <article class="step prose-wrap news-style" data-step="0">
   <div class="prose">
     <p class="dropcap" style="color:black;"> La tattica dei “double tap” consiste nello sferrare due attacchi consecutivi nello stesso luogo, uno dopo l’altro, con un tempo di attesa tra i due sufficiente, quanto basta, per far arrivare i soccorsi, i medici, gli agenti di polizia, chiunque intervenga per aiutare coloro che sono stati colpiti dalla prima esplosione. L’obiettivo è aumentare i danni, non sprecare colpi, essere certi che quell’attacco produrrà danni, ma non solo: colpire chi interviene instilla terrore nella mente di chi si lancia ad aiutare i feriti e acuisce il regime di terrore per la popolazione</p>
@@ -440,23 +428,13 @@
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const el = entry.target;
-if (entry.isIntersecting) {
-  el.classList.add("is-active");
-  const key = el.dataset.step;
-  if (key in charts) activate(key);
-
-  // Se step "news-style" e siamo su mobile, sfuma mappa
-  if (el.classList.contains("news-style") && window.innerWidth <= 900) {
-    stage.classList.add("dimmed");
-  }
-} else {
-  el.classList.remove("is-active");
-
-  // Se step "news-style" e siamo su mobile, rimuovi sfumatura
-  if (el.classList.contains("news-style") && window.innerWidth <= 900) {
-    stage.classList.remove("dimmed");
-  }
-}
+        if (entry.isIntersecting) {
+          el.classList.add("is-active");
+          const key = el.dataset.step;
+          if (key in charts) activate(key);
+        } else {
+          el.classList.remove("is-active");
+        }
       });
     }, { threshold: 0.55, root: null, rootMargin: "0px 0px -15% 0px" });
     steps.forEach(s => io.observe(s));
