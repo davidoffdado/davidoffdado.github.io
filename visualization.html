@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+  <html lang="it">
+    <head>
+    <meta charset="UTF-8">
+      <title>Dieci anni di migrazioni</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+          
+          <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        
+        body {
+          font-family: 'Montserrat', sans-serif;
+          color: #333;
+            background: #ffffff;
+            line-height: 1.7;
+          overflow-x: hidden;
+        }
+        
+        header {
+          text-align: center;
+          padding: 100px 20px 60px;
+          background: #ffffff;
+        }
+        
+        header h1 {
+          font-size: 3rem;
+          color: #black;
+        }
+        
+        header p {
+          font-size: 1.1rem;
+          color: #666;
+            margin-top: 10px;
+        }
+        
+        section {
+          max-width: 800px;
+          margin: auto;
+          padding: 80px 20px;
+          opacity: 0;
+          transform: translateY(40px);
+          transition: all 0.6s ease-out;
+        }
+        
+        section.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .subhead {
+          font-size: 1.5rem;
+          color: #black;
+            margin-bottom: 20px;
+        }
+        
+        .viz {
+          margin: 30px 0;
+          text-align: center;
+        }
+        
+iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+        
+        footer {
+          text-align: center;
+          padding: 40px 20px;
+          font-size: 0.9em;
+          color: #777;
+            background: #f9f9f9;
+        }
+        </style>
+          </head>
+          <body>
+          
+          <header>
+          <h1>Dieci anni di migrazione</h1>
+          <p>I dati per comprendere una tragedia silenziosa<br><em>Fonte: <a href="https://missingmigrants.iom.int/downloads">missingmigrants.iom.int </a> </em></p>
+          </header>
+          
+          <section>
+          <div class="subhead">Le migrazioni nel mondo</div>
+          <p>I dati analizzati vanno dal 2014 al 2025 e riguardano tutti gli incidenti avvenuti durante le rotte migratorie.</p>
+          <div class="viz">
+          <iframe src="https://flo.uri.sh/visualisation/25060385/embed" title="Mappa interattiva"></iframe>
+          </div>
+          </section>
+          
+          <section>
+          <div class="subhead">Il Mediterraneo</div>
+          <p>Il Mediterraneo rappresenta l'area con il numero più alto di incidenti e, di conseguenza, quello più pericoloso.</p>
+          <div class="viz">
+          <iframe src="https://flo.uri.sh/visualisation/25060723/embed" title="Mappa interattiva"></iframe>
+          </div>
+          </section>
+          
+          <section>
+          <div class="subhead">I dispersi nel tempo</div>
+          <p>Ogni anno registra un numero differente di dispersi ed è possibile selezionare l'area d'interesse.</p>
+          <div class="viz">
+          <iframe src="https://flo.uri.sh/visualisation/25061316/embed" title="Grafico mensile"></iframe>
+          </div>
+          </section>
+          
+          <section>
+          <div class="subhead">Le vittime nel tempo</div>
+          <p>>Ogni anno registra un numero differente di vittime ed è possibile selezionare l'area d'interesse.</p>
+          <div class="viz">
+          <iframe src="https://flo.uri.sh/visualisation/25061417/embed" title="Tabella dettagliata"></iframe>
+          </div>
+          </section>
+          
+          <section>
+          <div class="subhead">Tutti gli incidenti</div>
+          <p>Dalla seguente tabella è possibile consultare tutti gli eventi accaduti, ricercando attraverso la barra apposita.</p>
+          <div class="viz">
+          <iframe src="https://flo.uri.sh/visualisation/25061711/embed" title="Tabella dettagliata"></iframe>
+          </div>
+          </section>
+          
+          <footer>
+          Realizzato da David Ruffini · <a href="https://missingmigrants.iom.int/downloads"> IOM </a> · Dati aggiornati al 2025
+        </footer>
+          
+          <script>
+          // Animazione on scroll (fade-in)
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('section').forEach(section => {
+          observer.observe(section);
+        });
+        </script>
+          
+          </body>
+          </html>
+          
